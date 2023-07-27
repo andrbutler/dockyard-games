@@ -29,7 +29,10 @@ defmodule Games.RockPaperScissors do
    iex> Games.RockPaperScissors.check_result("apple", "paper")
   "Invalid choice, Try again!"
   """
-  def check_result(computer_choice, computer_choice) do "It's a tie!" end
+  def check_result(computer_choice, computer_choice) do
+    "It's a tie!"
+  end
+
   def check_result("paper", computer_choice) do
     if computer_choice == "rock" do
       "Paper covers rock, YOU WIN!"
