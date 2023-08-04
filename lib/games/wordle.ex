@@ -77,15 +77,10 @@ defmodule Games.Wordle do
   end
 
   def check_for_yellow(count, result_no_yellow, guess, answer_list, result) do
-    IO.inspect(count)
     guess_char = Enum.at(guess, count)
     current_color = Enum.at(result_no_yellow, count)
-    existing_index = if answer_list != [] do
-                      Enum.member?(answer_list, guess_char)
-                     else
-                      false
-                    end
-    answer_list = if existing_index == true do
+    existing_index = Enum.member?(answer_list, guess_char)
+    answer_list = if existing_index == true and current_color != :green do
                     List.delete(answer_list, guess_char)
                   else
                     answer_list
