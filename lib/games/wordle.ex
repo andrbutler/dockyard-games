@@ -59,16 +59,44 @@ defmodule Games.Wordle do
       end
 
     answer_without_green = remove_correct(String.codepoints(answer), checked)
+    #Current solution does not handle situation where same letter can be yellow and grey
+    #result = Enum.map(Enum.zip(checked, String.codepoints(guess)), fn {color, guess_char} ->
+      #existing_index = Enum.member?(answer_without_green, guess_char)
+      #cond do
+        #color == :green -> :green
+        #existing_index == true -> :yellow
+        #true -> :grey
+      #end
+    #end)
+    #result
+    check_for_yellow(0, checked, String.codepoints(guess), answer_without_green, [])
+  end
 
-    result = Enum.map(Enum.zip(checked, String.codepoints(guess)), fn {color, guess_char} ->
-      existing_index = Enum.member?(answer_without_green, guess_char)
-      cond do
-        color == :green -> :green
-        existing_index == true -> :yellow
-        true -> :grey
-      end
-    end)
+  def check_for_yellow(5, _, _, _, result) do 
     result
+  end
+
+  def check_for_yellow(count, result_no_yellow, guess, answer_list, result) do
+    IO.inspect(count)
+    guess_char = Enum.at(guess, count)
+    current_color = Enum.at(result_no_yellow, count)
+    existing_index = if answer_list != [] do
+                      Enum.member?(answer_list, guess_char)
+                     else
+                      false
+                    end
+    answer_list = if existing_index == true do
+                    List.delete(answer_list, guess_char)
+                  else
+                    answer_list
+                  end
+    color = cond do
+      current_color == :green -> [:green]
+      existing_index == true -> [:yellow]
+      true -> [:grey]
+    end
+    result = result ++ color
+    check_for_yellow(count + 1, result_no_yellow, guess, answer_list, result)
   end
 
   def remove_correct(answer_as_list, checked) do
@@ -78,7 +106,7 @@ defmodule Games.Wordle do
       else
         nil
       end 
-    end)
+    end) |> Enum.filter(fn item -> item != nil end)
   end
 
   def print_formated(word, color_map) do

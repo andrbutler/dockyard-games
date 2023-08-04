@@ -17,7 +17,7 @@ defmodule WordleTest do
     end
 
     test "all color" do
-      assert Games.Wordle.feedback("aaabb", "xaaaa") == [:grey, :green, :green, :yellow, :yellow]
+      assert Games.Wordle.feedback("aaabb", "xaaaa") == [:grey, :green, :green, :yellow, :grey]
     end
   end
 end
