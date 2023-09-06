@@ -1,23 +1,11 @@
 defmodule Games.GuessingGame do
   @moduledoc """
-  Documentation for `Games`.
+  Game that generates a random number between 1 and 10, gives player 5 tries to correctly guess and provides
+  hints based on guess.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Games.hello()
-      :world
-
-  """
   def generate_answer do
     Enum.random(1..10)
-  end
-
-  def generate_answer(num) do
-    num
   end
 
   def play() do
@@ -46,8 +34,6 @@ defmodule Games.GuessingGame do
       IO.gets("#{message}:")
       |> String.strip()
       |> String.to_integer()
-
-    IO.inspect(guess)
 
     cond do
       guess < answer ->

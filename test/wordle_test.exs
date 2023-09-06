@@ -3,7 +3,6 @@ defmodule WordleTest do
   doctest Games.Wordle
 
   describe "get_feedback/2" do
-
     test "all green" do
       assert Games.Wordle.feedback("aaaaa", "aaaaa") == [:green, :green, :green, :green, :green]
     end
@@ -13,7 +12,13 @@ defmodule WordleTest do
     end
 
     test "all yellow" do
-      assert Games.Wordle.feedback("abdce", "edcba") == [:yellow, :yellow, :yellow, :yellow, :yellow]
+      assert Games.Wordle.feedback("abdce", "edcba") == [
+               :yellow,
+               :yellow,
+               :yellow,
+               :yellow,
+               :yellow
+             ]
     end
 
     test "all color" do
