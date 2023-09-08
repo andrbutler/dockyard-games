@@ -67,7 +67,7 @@ defmodule Games.Wordle do
     guesses = [{String.trim(guess), feedback(answer, guess)}]
 
     if List.last(guesses) == {String.trim(guess), [:green, :green, :green, :green, :green]} do
-      "You Win!"
+      Games.init_menu("You Win!")
     else
       play(1, guesses, answer)
     end
@@ -79,7 +79,7 @@ defmodule Games.Wordle do
   def play(6, guesses, answer) do
     print_guesses_so_far(guesses)
     IO.puts("You Lose :(, Answer was: #{answer}.")
-    IO.puts("Better Luck, next time!")
+    Games.init_menu("Better Luck, next time!")
   end
 
   def play(5, guesses, answer) do
@@ -89,7 +89,7 @@ defmodule Games.Wordle do
     guesses = [{String.trim(guess), feedback(answer, guess)} | guesses] |> Enum.reverse()
 
     if List.last(guesses) == {String.trim(guess), [:green, :green, :green, :green, :green]} do
-      "You Win!"
+      Games.init_menu("You Win!")
     else
       play(6, guesses, answer)
     end
@@ -102,7 +102,7 @@ defmodule Games.Wordle do
     guesses = [{String.trim(guess), feedback(answer, guess)} | guesses] |> Enum.reverse()
 
     if List.last(guesses) == {String.trim(guess), [:green, :green, :green, :green, :green]} do
-      "You Win!"
+      Games.init_menu("You Win!")
     else
       play(tries + 1, guesses, answer)
     end

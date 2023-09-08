@@ -20,8 +20,9 @@ defmodule Games.GuessingGame do
     {tries, answer, message}
   end
 
+  @spec check_answer(number, any, any) :: :ok
   def check_answer(5, answer, _) do
-    IO.puts(
+    Games.init_menu(
       "Sorry, you ran out of guesses! :(\n the correct answer was: #{answer}. Better Luck next time!\nGoodbye!"
     )
   end
@@ -43,7 +44,7 @@ defmodule Games.GuessingGame do
         check_answer(tries, answer, "Your Guess was too high, try again")
 
       guess == answer ->
-        IO.puts("Congratualtions! You guessed the correct answer! Thanks for playing!")
+        Games.init_menu("Congratualtions! You guessed the correct answer! Thanks for playing!")
     end
   end
 end

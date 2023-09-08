@@ -12,7 +12,14 @@ defmodule Games.RockPaperScissors do
     player_choice =
       IO.gets("Choose: rock, paper, or scissors: ") |> String.trim() |> String.downcase()
 
-    check_result(player_choice, computer_choice)
+    result = check_result(player_choice, computer_choice)
+
+    if result == "Invalid choice, Try again!" do
+      IO.puts(result)
+      play()
+    else
+      Games.init_menu(result)
+    end
   end
 
   @doc """
@@ -58,7 +65,6 @@ defmodule Games.RockPaperScissors do
   end
 
   def check_result(_, _) do
-    IO.puts("Invalid choice, Try again!")
-    play()
+    "Invalid choice, Try again!"
   end
 end
