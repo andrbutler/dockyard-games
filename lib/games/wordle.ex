@@ -102,6 +102,7 @@ defmodule Games.Wordle do
     guesses = [{String.trim(guess), feedback(answer, guess)} | guesses] |> Enum.reverse()
 
     if List.last(guesses) == {String.trim(guess), [:green, :green, :green, :green, :green]} do
+      Games.Score.add_points(9)
       Games.init_menu("You Win!")
     else
       play(tries + 1, guesses, answer)

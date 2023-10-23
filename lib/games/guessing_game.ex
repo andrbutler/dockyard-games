@@ -44,6 +44,7 @@ defmodule Games.GuessingGame do
         check_answer(tries, answer, "Your Guess was too high, try again")
 
       guess == answer ->
+        Games.Score.add_points(2)
         Games.init_menu("Congratualtions! You guessed the correct answer! Thanks for playing!")
     end
   end

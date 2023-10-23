@@ -7,7 +7,6 @@ defmodule Games do
   main function runs from cli
   """
   def main(_args) do
-    {:ok, _pid} = Games.ScoreTracker.start_link()
     init_menu()
   end
 
@@ -47,7 +46,7 @@ defmodule Games do
     )
 
     IO.puts(
-      "\t1. (W)ordle - 9 points\n\t2. (R)ock, Paper, Scissors - 1 point\n\t3.(G)uessing Game - 5 points\n\tenter (S)top to quit\n\tenter s(C)ore to display current score"
+      "\t1. (W)ordle - 9 points\n\t2. (R)ock, Paper, Scissors - 3 point(tie 1 point)\n\t3.(G)uessing Game - 2 points\n\tenter (S)top to quit\n\tenter s(C)ore to display current score"
     )
 
     IO.gets("What do you want to play?\n")
@@ -97,6 +96,7 @@ defmodule Games do
   
   def execute_selection(:score) do
     score = Games.Score.current_score()
+    #score = "test"
     IO.puts("================================")
     IO.puts("Your current score is: #{score}")
     IO.puts("================================")

@@ -1,15 +1,15 @@
-defmodule Score do
+defmodule Games.Score do
   use GenServer
   def start_link(state) do
-    GenServer.start_link(__MODULE__, state)
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
-  def add_points(pid, value) do
-    Genserver.cast(pid, {:add, value})
+  def add_points(value) do
+    GenServer.cast(__MODULE__, {:add, value})
   end
 
-  def current_score(pid) do
-    Genserver.call(pid, :get_score)
+  def current_score() do
+    GenServer.call(__MODULE__, :get_score)
   end
 
   @impl true

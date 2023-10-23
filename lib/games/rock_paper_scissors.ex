@@ -37,11 +37,13 @@ defmodule Games.RockPaperScissors do
   "Invalid choice, Try again!"
   """
   def check_result(computer_choice, computer_choice) do
+    Games.Score.add_points(1)
     "It's a tie!"
   end
 
   def check_result("paper", computer_choice) do
     if computer_choice == "rock" do
+      Games.Score.add_points(3)
       "Paper covers rock, YOU WIN!"
     else
       "Scissors cut paper, YOU LOSE :("
@@ -50,6 +52,7 @@ defmodule Games.RockPaperScissors do
 
   def check_result("rock", computer_choice) do
     if computer_choice == "scissors" do
+      Games.Score.add_points(3)
       "Rock breaks scissors, YOU WIN!"
     else
       "Paper covers rock, YOU LOSE :("
@@ -58,6 +61,7 @@ defmodule Games.RockPaperScissors do
 
   def check_result("scissors", computer_choice) do
     if computer_choice == "rock" do
+      Games.Score.add_points(3)
       "Scissors cut paper, YOU WIN!"
     else
       "Rock breaks scissors, YOU LOSE :("
